@@ -4,7 +4,7 @@
     <button class="btn btn-outline-secondary d-lg-none me-2" (click)="toggleSidebar()">
       ☰ Menu
     </button>
-    <a class="navbar-brand">🏠 Home</a>
+    <a class="navbar-brand" [routerLink]="'/holerites/consulta'" routerLinkActive="active">🏠 Home</a>
 
     <div class="ms-auto d-flex align-items-center">
       <span class="me-3 text-muted">👤 {{ usuario?.nome }}</span>

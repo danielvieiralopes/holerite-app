@@ -12,9 +12,15 @@ import { CommonModule } from '@angular/common';
 })
 export class LayoutComponent implements OnInit {
   usuario: any;
-  menuItems: MenuItem[] = [];
   sidebarVisible = true;
   isSmallScreen = false;
+
+    menuItems = [
+    { label: ' 📋 Funcionários', route: '/funcionarios' },
+    { label: '➕ Cadastrar Funcionário', route: '/funcionarios/cadastrar' },
+    { label: '🔍 Consultar Holerite', route: '/holerites/consulta' },
+    { label: '📤 Cadastrar Holerites', route: '/holerites/upload' }
+  ];
 
   constructor(private authService: AuthService, private router: Router) {}
 
