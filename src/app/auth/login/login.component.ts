@@ -1,38 +1,43 @@
 import { Component } from "@angular/core";
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from "../../core/services/auth.service";
 import { Router } from "@angular/router";
-import { ReactiveFormsModule } from '@angular/forms';
-
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  imports: [ReactiveFormsModule],
+  standalone: true,
+  imports: [ReactiveFormsModule, CommonModule]
 })
 export class LoginComponent {
   form;
+  mensagemErro = '';
+
 
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
     private router: Router
-  ) {
-    this.form = this.fb.group({
-      cpf: ['', Validators.required],
-      senha: ['', Validators.required]
-    });
-  }
+  ) {this.form = this.fb.group({
+    cpf: ['', Validators.required],
+    senha: ['', Validators.required]
+  })}
+
 
   onSubmit() {
     if (this.form.invalid) return;
+
     const { cpf, senha } = this.form.value;
     this.auth.login(cpf!, senha!).subscribe({
       next: (res: any) => {
         localStorage.setItem('token', res.token);
         this.router.navigate(['/holerites/consulta']);
       },
-      error: () => alert('CPF ou senha inválidos.')
+      error: () => {
+        this.mensagemErro = 'CPF ou senha inválidos.';
+        setTimeout(() => this.mensagemErro = '', 4000);
+      }
     });
   }
 }

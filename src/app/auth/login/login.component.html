@@ -1,5 +1,41 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <label>CPF: <input formControlName="cpf" /></label><br />
-  <label>Senha: <input type="password" formControlName="senha" /></label><br />
-  <button type="submit">Entrar</button>
-</form>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
+    <h3 class="text-center mb-4">🔐 Login</h3>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label class="form-label">CPF</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="cpf"
+          placeholder="Digite seu CPF"
+        />
+        <div class="text-danger mt-1" *ngIf="form.get('cpf')?.touched && form.get('cpf')?.invalid">
+          CPF é obrigatório.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Senha</label>
+        <input
+          type="password"
+          class="form-control"
+          formControlName="senha"
+          placeholder="Digite sua senha"
+        />
+        <div class="text-danger mt-1" *ngIf="form.get('senha')?.touched && form.get('senha')?.invalid">
+          Senha é obrigatória.
+        </div>
+      </div>
+
+      <button class="btn btn-primary w-100" type="submit" [disabled]="form.invalid">
+        Entrar
+      </button>
+    </form>
+
+    <div *ngIf="mensagemErro" class="alert alert-danger mt-3 text-center">
+      {{ mensagemErro }}
+    </div>
+  </div>
+</div>
