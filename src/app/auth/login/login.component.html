@@ -1,1 +1,5 @@
-<p>login works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <label>CPF: <input formControlName="cpf" /></label><br />
+  <label>Senha: <input type="password" formControlName="senha" /></label><br />
+  <button type="submit">Entrar</button>
+</form>
