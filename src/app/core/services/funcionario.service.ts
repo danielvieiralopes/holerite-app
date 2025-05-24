@@ -18,4 +18,12 @@ export class FuncionarioService {
   cadastrar(funcionario: Funcionario): Observable<Funcionario> {
     return this.http.post<Funcionario>(this.apiUrl, funcionario);
   }
+
+  atualizar(funcionario: Funcionario): Observable<Funcionario> {
+    return this.http.put<Funcionario>(`${this.apiUrl}/${funcionario.id}`, funcionario);
+  }
+
+  excluir(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
 }

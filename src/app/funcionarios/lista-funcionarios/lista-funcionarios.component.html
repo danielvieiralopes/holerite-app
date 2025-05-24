@@ -1,17 +1,60 @@
-<h2>Lista de Funcionários</h2>
-<table border="1" cellpadding="5">
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th>CPF</th>
-      <th>Data Nascimento</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let f of funcionarios">
-      <td>{{ f.nome }}</td>
-      <td>{{ f.cpf }}</td>
-      <td>{{ f.dataNascimento | date: 'dd/MM/yyyy' }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="container mt-5">
+  <div class="card shadow-sm p-4">
+    <h3 class="mb-4">📋 Lista de Funcionários</h3>
+
+    <div class="mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="🔍 Pesquisar por nome"
+        [(ngModel)]="termoPesquisa"
+        (input)="filtrarFuncionarios()"
+      />
+    </div>
+
+    <table class="table table-bordered table-hover align-middle text-center">
+      <thead class="table-light">
+        <tr>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>Data de Nascimento</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let f of funcionariosFiltrados">
+            <ng-container *ngIf="funcionarioEditandoId === f.id; else visualizacao">
+              <td>
+                <input type="text" class="form-control" [(ngModel)]="funcionarioEditadoTemp.nome" />
+              </td>
+              <td>
+                <input type="text" class="form-control" [(ngModel)]="funcionarioEditadoTemp.cpf" />
+              </td>
+              <td>
+                <input type="date" class="form-control" [(ngModel)]="funcionarioEditadoTemp.dataNascimento" />
+              </td>
+              <td>
+                <button class="btn btn-sm btn-success me-2" (click)="salvarEdicao()">💾 Salvar</button>
+                <button class="btn btn-sm btn-secondary" (click)="cancelarEdicao()">❌ Cancelar</button>
+              </td>
+            </ng-container>
+
+            <ng-template #visualizacao>
+              <td>{{ f.nome }}</td>
+              <td>{{ f.cpf }}</td>
+              <td>{{ f.dataNascimento | date: 'dd/MM/yyyy' }}</td>
+              <td>
+                <button class="btn btn-sm btn-warning me-2" (click)="editarFuncionario(f)">✏️ Editar</button>
+                <button class="btn btn-sm btn-danger" (click)="excluirFuncionario(f)">🗑️ Excluir</button>
+              </td>
+            </ng-template>
+          </tr>
+      </tbody>
+
+    </table>
+
+    <div *ngIf="funcionariosFiltrados.length === 0" class="alert alert-warning mt-3">
+      Nenhum funcionário encontrado.
+    </div>
+  </div>
+</div>

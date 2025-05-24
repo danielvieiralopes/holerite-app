@@ -1,16 +1,43 @@
-<h2>Cadastrar Funcionário</h2>
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <label>Nome:<br />
-    <input formControlName="nome" />
-  </label><br /><br />
+<div class="container mt-5">
+  <div class="card shadow-sm p-4">
+    <h3 class="mb-4">📝 Cadastro de Funcionário</h3>
 
-  <label>CPF:<br />
-    <input formControlName="cpf" />
-  </label><br /><br />
+    <form (ngSubmit)="cadastrarFuncionario(form)" #form="ngForm">
+      <div class="mb-3">
+        <label class="form-label">Nome</label>
+        <input
+          type="text"
+          class="form-control"
+          name="nome"
+          placeholder="Nome do Funcionário"
+          [(ngModel)]="funcionario.nome"
+          required
+        />
+      </div>
 
-  <label>Data Nascimento:<br />
-    <input type="date" formControlName="dataNascimento" />
-  </label><br /><br />
+      <div class="mb-3">
+        <label class="form-label">CPF</label>
+        <input class="form-control" type="text" [(ngModel)]="funcionario.cpf"
+                       (input)="formatCpf()"
+                       name="cpf" placeholder="000.000.000-00" required/>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Data de Nascimento</label>
+        <input
+          type="date"
+          class="form-control"
+          name="dataNascimento"
+          [(ngModel)]="funcionario.dataNascimento"
+          required
+        />
+      </div>
 
-  <button type="submit">Salvar</button>
-</form>
+      <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Cadastrar</button>
+    </form>
+
+        <div *ngIf="showMessage" class="alert alert-success position-relative mt-3" style="padding-bottom: 4px;">
+          {{mensagem}}
+          <div class="progress-bar-fine" [style.width.%]="progress"></div>
+      </div>
+  </div>
+</div>
