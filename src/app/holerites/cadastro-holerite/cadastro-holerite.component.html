@@ -1,1 +1,23 @@
-<p>cadastro-holerite works!</p>
+<h2>Upload de Holerite</h2>
+
+<form (ngSubmit)="onSubmit()">
+  <label>Arquivo PDF:
+    <input type="file" (change)="onFileSelected($event)" accept="application/pdf" />
+  </label><br /><br />
+
+  <label>Mês de Referência:
+    <input type="number" [(ngModel)]="mesReferencia" name="mesReferencia" min="1" max="12" />
+  </label><br /><br />
+
+  <label>Ano de Referência:
+    <input type="number" [(ngModel)]="anoReferencia" name="anoReferencia" min="2000" max="2100" />
+  </label><br /><br />
+
+  <label>Tipo de Holerite:
+    <select [(ngModel)]="tipoHolerite" name="tipoHolerite">
+      <option *ngFor="let tipo of tipos" [value]="tipo.id">{{ tipo.nome }}</option>
+    </select>
+  </label><br /><br />
+
+  <button type="submit">Enviar</button>
+</form>
