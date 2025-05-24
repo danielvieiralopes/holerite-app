@@ -3,6 +3,7 @@ import { HoleriteService } from '../../core/services/holerite.service';
 import { saveAs } from 'file-saver';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ETipoHolerite } from '../../core/enums/EtipoHolerite';
 
 @Component({
   selector: 'app-consulta-holerite',
@@ -17,13 +18,20 @@ export class ConsultaHoleriteComponent {
   mesReferencia?: number;
   anoReferencia?: number;
 
-  tipos = [
-    { id: 1, nome: 'Salario' },
-    { id: 2, nome: 'Adiantamento' },
-    { id: 3, nome: 'Ferias' },
-    { id: 4, nome: 'DecimoTerceiro' },
-    { id: 5, nome: 'Outros' }
-  ];
+tipos = Object.keys(ETipoHolerite)
+  .filter(key => !isNaN(Number(key))) // filtra as chaves numéricas
+  .map(key => ({
+    id: Number(key),
+    nome: ETipoHolerite[Number(key)]
+  }));
+
+  formatCpf() {
+    this.cpf = this.cpf.replace(/\D/g, '')
+                .replace(/(\d{3})(\d)/, '$1.$2')
+                .replace(/(\d{3})(\d)/, '$1.$2')
+                .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+  }
+
 
   constructor(private holeriteService: HoleriteService) {}
 

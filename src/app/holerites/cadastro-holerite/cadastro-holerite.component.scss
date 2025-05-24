@@ -1,0 +1,13 @@
+.alert {
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar-fine {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background-color: #28a745; /* verde */
+  transition: width 0.1s linear;
+}

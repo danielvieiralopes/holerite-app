@@ -5,7 +5,9 @@
     <form (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label class="form-label">CPF</label>
-        <input class="form-control" type="text" [(ngModel)]="cpf" name="cpf" placeholder="000.000.000-00" />
+        <input class="form-control" type="text" [(ngModel)]="cpf" 
+                       (input)="formatCpf()" 
+                       name="cpf" placeholder="000.000.000-00" />
       </div>
 
       <div class="mb-3">
@@ -28,8 +30,10 @@
         <label class="form-label">Tipo de Holerite</label>
         <select class="form-select" [(ngModel)]="tipoHolerite" name="tipoHolerite">
           <option value="">Selecione...</option>
-          <option *ngFor="let tipo of tipos" [value]="tipo.id">{{ tipo.nome }}</option>
+          <option *ngFor="let tipo of tipos" [ngValue]="tipo.id">{{ tipo.nome }}</option>
         </select>
+
+
       </div>
 
       <button class="btn btn-success" type="submit">Baixar Holerite</button>
