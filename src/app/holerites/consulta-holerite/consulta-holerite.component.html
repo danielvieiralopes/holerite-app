@@ -1,27 +1,38 @@
-<h2>Consulta de Holerite</h2>
+<div class="container mt-5">
+  <div class="card shadow-sm p-4">
+    <h3 class="mb-4">🔍 Consulta de Holerite</h3>
 
-<form (ngSubmit)="onSubmit()">
-  <label>CPF:
-    <input [(ngModel)]="cpf" name="cpf" />
-  </label><br /><br />
+    <form (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label class="form-label">CPF</label>
+        <input class="form-control" type="text" [(ngModel)]="cpf" name="cpf" placeholder="000.000.000-00" />
+      </div>
 
-  <label>Data Nascimento:
-    <input type="date" [(ngModel)]="dataNascimento" name="dataNascimento" />
-  </label><br /><br />
+      <div class="mb-3">
+        <label class="form-label">Data de Nascimento</label>
+        <input class="form-control" type="date" [(ngModel)]="dataNascimento" name="dataNascimento" />
+      </div>
 
-  <label>Tipo de Holerite:
-    <select [(ngModel)]="tipoHolerite" name="tipoHolerite">
-      <option *ngFor="let tipo of tipos" [value]="tipo.id">{{ tipo.nome }}</option>
-    </select>
-  </label><br /><br />
+      <div class="mb-3 row">
+        <div class="col-md-6">
+          <label class="form-label">Mês de Referência</label>
+          <input class="form-control" type="number" [(ngModel)]="mesReferencia" name="mesReferencia" min="1" max="12" />
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Ano de Referência</label>
+          <input class="form-control" type="number" [(ngModel)]="anoReferencia" name="anoReferencia" min="2000" max="2100" />
+        </div>
+      </div>
 
-  <label>Mês de Referência:
-    <input type="number" [(ngModel)]="mesReferencia" name="mesReferencia" min="1" max="12" />
-  </label><br /><br />
+      <div class="mb-3">
+        <label class="form-label">Tipo de Holerite</label>
+        <select class="form-select" [(ngModel)]="tipoHolerite" name="tipoHolerite">
+          <option value="">Selecione...</option>
+          <option *ngFor="let tipo of tipos" [value]="tipo.id">{{ tipo.nome }}</option>
+        </select>
+      </div>
 
-  <label>Ano de Referência:
-    <input type="number" [(ngModel)]="anoReferencia" name="anoReferencia" min="2000" max="2100" />
-  </label><br /><br />
-
-  <button type="submit">Consultar</button>
-</form>
+      <button class="btn btn-success" type="submit">Baixar Holerite</button>
+    </form>
+  </div>
+</div>

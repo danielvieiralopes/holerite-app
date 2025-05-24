@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { LoginComponent } from "./auth/login/login.component";
+import { RouterModule } from '@angular/router';
+import { LoginComponent } from './auth/login/login.component';
 
 @Component({
   selector: 'app-root',
-  imports: [LoginComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  standalone: true,
+  imports: [RouterModule]
 })
-export class AppComponent {
-  title = 'holerite-app';
-}
+export class AppComponent {}

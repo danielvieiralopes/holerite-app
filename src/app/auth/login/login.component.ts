@@ -30,7 +30,7 @@ export class LoginComponent {
     this.auth.login(cpf!, senha!).subscribe({
       next: (res: any) => {
         localStorage.setItem('token', res.token);
-        this.router.navigate(['/']);
+        this.router.navigate(['/holerites/consulta']);
       },
       error: () => alert('CPF ou senha inválidos.')
     });

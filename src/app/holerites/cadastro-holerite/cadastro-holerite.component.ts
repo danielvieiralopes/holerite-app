@@ -7,8 +7,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-cadastro-holerite',
   standalone: true,
   imports: [FormsModule, CommonModule],
-  templateUrl: './cadastro-holerite.component.html',
-  styleUrl: './cadastro-holerite.component.css'
+  templateUrl: './cadastro-holerite.component.html'
 })
 export class CadastroHoleriteComponent {
   file?: File;
@@ -24,6 +23,8 @@ export class CadastroHoleriteComponent {
     { id: 5, nome: 'Outros' }
   ];
 
+  mensagem: string | undefined;
+
   constructor(private holeriteService: HoleriteService) {}
 
   onFileSelected(event: any) {
@@ -36,10 +37,10 @@ export class CadastroHoleriteComponent {
       return;
     }
 
-    this.holeriteService.uploadHolerite(this.file, this.mesReferencia, this.anoReferencia, this.tipoHolerite)
-      .subscribe({
-        next: () => alert('Holerite salvo.'),
-        error: () => alert('Erro ao enviar holerite.')
-      });
+this.holeriteService.uploadHolerite(this.file, this.mesReferencia, this.anoReferencia, this.tipoHolerite).subscribe({
+  next: () => this.mensagem = 'Holerite enviado com sucesso!',
+  error: () => this.mensagem = 'Erro ao enviar holerite.'
+});
   }
 }
+

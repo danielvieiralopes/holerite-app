@@ -5,10 +5,26 @@ import { Observable } from "rxjs";
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private apiUrl = 'http://localhost:5258/api/auth';
+  private usuario: any = null;
 
   constructor(private http: HttpClient) {}
 
   login(cpf: string, senha: string): Observable<{ token: string }> {
     return this.http.post<{ token: string }>(`${this.apiUrl}/login`, { cpf, senha });
+  }
+
+   getUsuarioLogado() {
+    if (!this.usuario) {
+      const usuarioStr = localStorage.getItem('usuario');
+      if (usuarioStr) {
+        this.usuario = JSON.parse(usuarioStr);
+      }
+    }
+    return this.usuario;
+  }
+
+  logout() {
+    localStorage.clear();
+    this.usuario = null;
   }
 }
