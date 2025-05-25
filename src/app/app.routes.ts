@@ -17,7 +17,7 @@ export const routes: Routes = [
       { path: 'funcionarios/cadastrar', component: CadastroFuncionarioComponent },
       { path: 'holerites/upload', component: CadastroHoleriteComponent },
       { path: 'holerites/consulta', component: ConsultaHoleriteComponent },
-      { path: '', redirectTo: 'funcionarios', pathMatch: 'full' }
+      { path: '', redirectTo: '', pathMatch: 'full' }
     ]
   },
 
