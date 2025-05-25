@@ -36,14 +36,13 @@ tipos = Object.keys(ETipoHolerite)
   constructor(private holeriteService: HoleriteService) {}
 
   onSubmit() {
-    if (!this.cpf || !this.dataNascimento || !this.tipoHolerite || !this.mesReferencia || !this.anoReferencia) {
+    if (!this.cpf || !this.tipoHolerite || !this.mesReferencia || !this.anoReferencia) {
       alert('Preencha todos os campos!');
       return;
     }
 
     const consulta = {
       cpf: this.cpf,
-      dataNascimento: this.dataNascimento,
       tipoHolerite: this.tipoHolerite,
       mesReferencia: this.mesReferencia,
       anoReferencia: this.anoReferencia

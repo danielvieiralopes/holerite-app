@@ -5,16 +5,10 @@
     <form (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label class="form-label">CPF</label>
-        <input class="form-control" type="text" [(ngModel)]="cpf" 
-                       (input)="formatCpf()" 
+        <input class="form-control" type="text" [(ngModel)]="cpf"
+                       (input)="formatCpf()"
                        name="cpf" placeholder="000.000.000-00" />
       </div>
-
-      <div class="mb-3">
-        <label class="form-label">Data de Nascimento</label>
-        <input class="form-control" type="date" [(ngModel)]="dataNascimento" name="dataNascimento" />
-      </div>
-
       <div class="mb-3 row">
         <div class="col-md-6">
           <label class="form-label">Mês de Referência</label>
