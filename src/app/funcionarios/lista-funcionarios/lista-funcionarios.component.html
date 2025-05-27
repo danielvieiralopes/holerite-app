@@ -25,7 +25,7 @@
           <tr *ngFor="let f of funcionariosFiltrados">
             <ng-container *ngIf="funcionarioEditandoId === f.id; else visualizacao">
               <td>
-                <input type="text" class="form-control" [(ngModel)]="funcionarioEditadoTemp.nome" />
+                <input type="text" class="form-control" [(ngModel)]="funcionarioEditadoTemp.nomeFuncionario" />
               </td>
               <td>
                 <input type="text" class="form-control" [(ngModel)]="funcionarioEditadoTemp.cpf" />
@@ -40,7 +40,7 @@
             </ng-container>
 
             <ng-template #visualizacao>
-              <td>{{ f.nome }}</td>
+              <td>{{ f.nomeFuncionario }}</td>
               <td>{{ f.cpf }}</td>
               <td>{{ f.dataNascimento | date: 'dd/MM/yyyy' }}</td>
               <td>

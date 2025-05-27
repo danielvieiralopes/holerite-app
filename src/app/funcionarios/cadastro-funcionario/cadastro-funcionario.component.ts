@@ -4,6 +4,7 @@ import { FormBuilder, Validators, ReactiveFormsModule, FormsModule, NgForm } fro
 import { FuncionarioService } from '../../core/services/funcionario.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ETipoUsuario } from '../../core/enums/EtipoUsuario';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { CommonModule } from '@angular/common';
 })
 export class CadastroFuncionarioComponent {
   form;
-  funcionario: Funcionario = { nome: '', cpf: '', dataNascimento: '' };
+  funcionario: Funcionario = { nomeFuncionario: '', cpf: '', dataNascimento: '', tipoUsuario: ETipoUsuario.Usuario };
   mensagem = '';
   showMessage = false;
   progress = 100;
@@ -30,6 +31,10 @@ export class CadastroFuncionarioComponent {
     dataNascimento: ['', Validators.required]
   })}
 
+  //tiposUsuarios
+  tiposUsuarios = [
+    { label: 'Usuário', value: ETipoUsuario.Usuario },
+    { label: 'Administrador', value: ETipoUsuario.Admin }];
 
     formatCpf() {
     this.funcionario.cpf = this.funcionario.cpf.replace(/\D/g, '')
@@ -42,7 +47,7 @@ cadastrarFuncionario(form: NgForm) {
   this.funcionarioService.cadastrar(this.funcionario).subscribe({
     next: () => {
       this.mensagem = 'Funcionário cadastrado com sucesso!';
-      this.funcionario = { nome: '', cpf: '', dataNascimento: '' };
+      this.funcionario = { nomeFuncionario: '', cpf: '', dataNascimento: '', tipoUsuario: ETipoUsuario.Usuario }; // Limpa o formulário
     },
     error: () => {
       this.mensagem = 'Erro ao cadastrar funcionário.';

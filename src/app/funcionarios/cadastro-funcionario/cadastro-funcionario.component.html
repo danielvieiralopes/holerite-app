@@ -10,7 +10,7 @@
           class="form-control"
           name="nome"
           placeholder="Nome do Funcionário"
-          [(ngModel)]="funcionario.nome"
+          [(ngModel)]="funcionario.nomeFuncionario"
           required
         />
       </div>
@@ -30,6 +30,16 @@
           [(ngModel)]="funcionario.dataNascimento"
           required
         />
+      </div>
+
+      <!-- ddl etipoUsuario -->
+
+      <div class="mb-3">
+        <label class="form-label">Tipo de Usuário</label>
+        <select class="form-select" name="tipoUsuario" [(ngModel)]="funcionario.tipoUsuario" required>
+          <option value="">Selecione...</option>
+          <option *ngFor="let tipo of tiposUsuarios" [value]="tipo.value">{{ tipo.label }}</option>
+        </select>
       </div>
 
       <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Cadastrar</button>

@@ -16,7 +16,7 @@ export class LayoutComponent implements OnInit {
   isSmallScreen = false;
 
     menuItems = [
-      { label: '🔍  Holerites', route: '/holerites/consulta' },
+      { label: '🔍  Holerite', route: '/holerites/consulta' },
       { label: '📤 Cadastrar Holerites', route: '/holerites/upload' },
     { label: ' 📋 Funcionários', route: '/funcionarios' },
     { label: '➕ Cadastrar Funcionário', route: '/funcionarios/cadastrar' }

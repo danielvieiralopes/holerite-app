@@ -41,7 +41,7 @@ export class ListaFuncionariosComponent implements OnInit {
   filtrarFuncionarios() {
     const termo = this.termoPesquisa.toLowerCase();
     this.funcionariosFiltrados = this.funcionarios.filter(f =>
-      f.nome.toLowerCase().includes(termo)
+      f.nomeFuncionario.toLowerCase().includes(termo)
     );
   }
 
@@ -68,7 +68,7 @@ export class ListaFuncionariosComponent implements OnInit {
   }
 
   excluirFuncionario(funcionario: Funcionario) {
-    const confirmacao = confirm(`Deseja excluir o funcionário ${funcionario.nome}?`);
+    const confirmacao = confirm(`Deseja excluir o funcionário ${funcionario.nomeFuncionario}?`);
     if (confirmacao && funcionario.id) {
       this.funcionarioService.excluir(funcionario.id).subscribe({
         next: () => this.carregarFuncionarios(),

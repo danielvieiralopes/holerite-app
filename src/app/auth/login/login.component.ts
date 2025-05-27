@@ -26,18 +26,29 @@ export class LoginComponent {
 
 
   onSubmit() {
-    if (this.form.invalid) return;
+  if (this.form.invalid) return;
+  const { cpf, senha } = this.form.value;
 
-    const { cpf, senha } = this.form.value;
-    this.auth.login(cpf!, senha!).subscribe({
-      next: (res: any) => {
-        localStorage.setItem('token', res.token);
-        this.router.navigate(['/holerites/consulta']);
-      },
-      error: () => {
-        this.mensagemErro = 'CPF ou senha inválidos.';
-        setTimeout(() => this.mensagemErro = '', 4000);
+  this.auth.login(cpf!, senha!).subscribe({
+    next: (res: any) => {
+      localStorage.setItem('token', res.token);
+      this.router.navigate(['/holerites/consulta']);
+    },
+    error: (err) => {
+      const error = err.error;
+      this.mensagemErro = 'CPF ou senha inválidos.';
+
+      if (error?.precisaTrocarSenha) {
+
+        localStorage.setItem('cpf_temp', cpf ?? '');
+        localStorage.setItem('senha_temp', senha ?? '');
+
+        this.router.navigate(['/alterar-senha']);
+      } else {
+         setTimeout(() => this.mensagemErro = '', 4000);
       }
-    });
-  }
+    }
+  });
+}
+
 }
