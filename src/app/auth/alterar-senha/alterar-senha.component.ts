@@ -34,7 +34,10 @@ export class AlterarSenhaComponent {
         alert('Senha alterada com sucesso!');
         this.router.navigate(['/login']);
       },
-      error: () => alert('Erro ao alterar senha.')
+      error: (error) => {
+        console.error('Erro ao alterar a senha:', error);
+        alert('Erro ao alterar a senha. Por favor, tente novamente.');
+      }
     });
   }
 }

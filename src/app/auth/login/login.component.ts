@@ -25,30 +25,53 @@ export class LoginComponent {
   })}
 
 
-  onSubmit() {
+//   onSubmit() {
+//   if (this.form.invalid) return;
+//   const { cpf, senha } = this.form.value;
+
+//   this.auth.login(cpf!, senha!).subscribe({
+//     next: (res: any) => {
+//       localStorage.setItem('token', res.token);
+//       this.router.navigate(['/holerites/consulta']);
+//     },
+//     error: (err) => {
+//       const error = err.error;
+//       this.mensagemErro = 'CPF ou senha inválidos.';
+
+//       if (error?.precisaTrocarSenha) {
+
+//         localStorage.setItem('cpf_temp', cpf ?? '');
+//         localStorage.setItem('senha_temp', senha ?? '');
+
+//         this.router.navigate(['/alterar-senha']);
+//       } else {
+//          setTimeout(() => this.mensagemErro = '', 4000);
+//       }
+//     }
+//   });
+// }
+
+onSubmit() {
   if (this.form.invalid) return;
+
   const { cpf, senha } = this.form.value;
 
   this.auth.login(cpf!, senha!).subscribe({
     next: (res: any) => {
       localStorage.setItem('token', res.token);
-      this.router.navigate(['/holerites/consulta']);
-    },
-    error: (err) => {
-      const error = err.error;
-      this.mensagemErro = 'CPF ou senha inválidos.';
 
-      if (error?.precisaTrocarSenha) {
-
+      if (res.precisaTrocarSenha) {
         localStorage.setItem('cpf_temp', cpf ?? '');
         localStorage.setItem('senha_temp', senha ?? '');
 
-        this.router.navigate(['/alterar-senha']);
+        this.router.navigate(['/alterar-senha']); // Redireciona para tela de troca de senha
       } else {
-         setTimeout(() => this.mensagemErro = '', 4000);
+        this.router.navigate(['/holerites/consulta']);
       }
-    }
+    },
+    error: () => alert('CPF ou senha inválidos.')
   });
 }
+
 
 }
