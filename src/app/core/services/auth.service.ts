@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { Funcionario } from "../models/funcionario";
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -31,5 +32,9 @@ export class AuthService {
   alterarSenha(senhaAtual: string, novaSenha: string) {
    return this.http.post<{ token: string }>(`${this.apiUrl}/change-password`, { senhaAtual, novaSenha });
 }
+
+  cadastrar(funcionario: Funcionario): Observable<Funcionario> {
+    return this.http.post<Funcionario>(`${this.apiUrl}/register`, funcionario);
+  }
 
 }

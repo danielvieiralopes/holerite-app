@@ -1,11 +1,10 @@
 import { Funcionario } from './../../core/models/funcionario';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule, FormsModule, NgForm } from '@angular/forms';
-import { FuncionarioService } from '../../core/services/funcionario.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ETipoUsuario } from '../../core/enums/EtipoUsuario';
-
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-cadastro-funcionario',
@@ -23,7 +22,7 @@ export class CadastroFuncionarioComponent {
 
   constructor(
     private fb: FormBuilder,
-    private funcionarioService: FuncionarioService,
+    private authService: AuthService,
     private router: Router
   ) {this.form =this.fb.group({
     nome: ['', Validators.required],
@@ -44,7 +43,7 @@ export class CadastroFuncionarioComponent {
   }
 
 cadastrarFuncionario(form: NgForm) {
-  this.funcionarioService.cadastrar(this.funcionario).subscribe({
+  this.authService.cadastrar(this.funcionario).subscribe({
     next: () => {
       this.mensagem = 'Funcionário cadastrado com sucesso!';
       this.funcionario = { nomeFuncionario: '', cpf: '', dataNascimento: '', tipoUsuario: ETipoUsuario.Usuario }; // Limpa o formulário

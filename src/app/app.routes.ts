@@ -9,6 +9,7 @@ import { AlterarSenhaComponent } from './auth/alterar-senha/alterar-senha.compon
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  {path: 'alterar-senha', component: AlterarSenhaComponent},
 
   {
     path: '',

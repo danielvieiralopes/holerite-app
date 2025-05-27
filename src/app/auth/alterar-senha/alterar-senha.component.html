@@ -1,7 +1,25 @@
-<h2>Alterar Senha</h2>
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <label>Nova Senha:
-    <input type="password" formControlName="novaSenha" />
-  </label>
-  <button type="submit">Salvar</button>
-</form>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
+    <h4 class="text-center mb-4">Alterar Senha</h4>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="novaSenha" class="form-label">Nova Senha</label>
+        <input
+          type="password"
+          id="novaSenha"
+          class="form-control"
+          formControlName="novaSenha"
+          placeholder="Digite a nova senha"
+        />
+
+        <!-- adicione validacao para pelo menos uma letra minuscula uma maiuscula e um caractere especial e no minimo 6 caracteres -->
+        <div *ngIf="form.get('novaSenha')?.invalid && form.get('novaSenha')?.touched" class="text-danger mt-1">
+          A senha deve ter no mínimo 6 caracteres.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary w-100" [disabled]="form.invalid">
+        Salvar Nova Senha
+      </button>
+    </form>
+  </div>
+</div>
