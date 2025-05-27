@@ -15,63 +15,93 @@ Desenvolver um sistema que permita:
 
 ## ⚙️ Tecnologias utilizadas
 
-- **Frontend:** Angular 19 (em desenvolvimento)
-- **Backend:** .NET 6 / C# (em desenvolvimento) 
-  - Iniciado como aplicação console para extração e separação de holerites
-  - Em transição para API REST
+- **Frontend:** Angular 19 
+- **Backend:** .NET 8.0 / C# 
+- **Banco de Dados:** SQL Server
 - **Outras ferramentas:**
   - Git e GitHub
   - Bibliotecas .NET para processamento de PDF
 
-## 📦 Estrutura atual do projeto
+##  Funcionalidades Implementadas
 
-### Frontend
-
-O frontend está sendo desenvolvido como um protótipo funcional e utiliza **dados mockados** para simular o comportamento da aplicação.
-
-- [x] Interface de carregamento de holerites
-- [x] Visualização básica dos dados extraídos
-- [ ] Integração com o backend (em andamento)
-
-### Backend
-
-O backend já é capaz de:
-
-- [x] Extrair nomes dos funcionários a partir de arquivos PDF
-- [x] Separar holerites individualmente com base no nome
-- [x] Relacionar holerites aos respectivos funcionários
-- [x] Armazenar dados em banco de dados
+ - Upload de arquivos PDF contendo holerites;
+ - 
+ - Extração de dados dos funcionários a partir dos PDFs;
+ - 
+ - Relacionamento dos holerites aos respectivos funcionários;
+ - 
+ - Exibição das informações extraídas em uma interface web;
+ - 
+ - Integração com backend para armazenamento e recuperação dos dados;
+ - 
+ - Implantação na infraestrutura de intranet da empresa.
 
 > O backend será expandido no próximo ciclo do PEX para incluir funcionalidades adicionais.
 
-## 🧪 Como testar o protótipo
+## Próximos Passos
+ - Implementar funcionalidade de "Esqueci a Senha", gerenciada exclusivamente por administradores;
+ - 
+ - Melhorar a segurança e autenticação dos usuários;
+ - 
+ - Otimizar a extração de dados dos PDFs para suportar diferentes formatos;
+ - 
+ - Adicionar testes automatizados para garantir a estabilidade do sistema;
+ - 
+ - Melhorar a documentação e o guia de instalação para facilitar a contribuição de outros desenvolvedores.
+
+## 🧪 Como testar a aplicação 
 
 1. Clone o repositório:
    ```bash
    git clone https://github.com/danielvieiralopes/holerite-app.git
-Acesse a pasta do projeto e abra o index.html (ou a aplicação Angular, se já configurada).
+  ```
+  ```bash
+   git clone https://github.com/danielvieiralopes/holeriteAPI
+  ```
 
-Os dados exibidos atualmente são mockados apenas para fins de demonstração visual.
+  ### Rodando o Projeto
 
-🚧 Próximos passos
-Finalizar a API REST com .NET para servir os dados extraídos
+  Siga o passo a passo para executar a API e o frontend Angular:
 
-Conectar o frontend à API via HTTP
+  #### Pré-requisitos
+  - .NET 8.0 SDK instalado.
+  - Node.js (versão 14 ou superior) e Angular CLI instalados.
+  - SQL Server configurado (se aplicável).
 
-Implementar:
+  #### API (.NET)
+  1. Abra um terminal e navegue até a pasta raiz do projeto.
+  2. Entre na pasta do backend (exemplo: `cd holerite-app/backend`).
+  3. Restaure os pacotes:
+    ```bash
+    dotnet restore
+    ```
+  4. Compile o projeto:
+    ```bash
+    dotnet build
+    ```
+  5. Execute a aplicação:
+    ```bash
+    dotnet run
+    ```
+  6. A API ficará disponível em `https://localhost:5258` (ou conforme configurado).
 
-Autenticação de usuário
+  #### Frontend (Angular)
+  1. Em outro terminal, navegue até o diretório do frontend (exemplo: `cd holerite-app/frontend`).
+  2. Instale as dependências:
+    ```bash
+    npm install
+    ```
+  3. Inicie o servidor de desenvolvimento:
+    ```bash
+    ng serve
+    ```
+  4. A aplicação Angular estará acessível em `http://localhost:4200`.
 
-Gerenciamento de perfis
+  #### Observações
+  - Certifique-se de que a API está ativa antes de iniciar o frontend para que as chamadas HTTP sejam bem-sucedidas.
+  - Confirme as configurações de CORS e a URL da API no projeto Angular para garantir a comunicação correta.
 
-Painel de administração
 
-Geração de relatórios
-
-📌 Observações
-Este projeto foi idealizado e está sendo desenvolvido no contexto acadêmico e prático do Programa de Extensão (PEX) da Faculdade Descomplica.
-
-A proposta é aplicar conceitos reais de desenvolvimento web, boas práticas de engenharia de software e colaboração com empresas reais.
 
 👨‍💻 Autor
 Desenvolvido por Daniel Vieira Lopes
