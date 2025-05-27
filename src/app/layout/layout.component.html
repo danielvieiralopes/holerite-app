@@ -19,11 +19,21 @@
       class="bg-dark text-white p-3 h-100"
       [ngClass]="{ 'd-lg-block': true }"
       style="width: 250px;"
+      *ngIf="exibirOpcaoFuncionarios || exibirOpcaoHolerites"
     >
       <h4 class="mb-4">📁 Menu</h4>
       <ul class="nav flex-column">
-        <li class="nav-item" *ngFor="let item of menuItems">
-          <a [routerLink]="item.route" class="nav-link text-white">{{ item.label }}</a>
+        <li class="nav-item" *ngIf="exibirOpcaoFuncionarios">
+          <a [routerLink]="'/funcionarios'" class="nav-link text-white">Funcionários</a>
+        </li>
+        <li class="nav-item" *ngIf="exibirOpcaoFuncionarios">
+          <a [routerLink]="'/funcionarios/cadastrar'" class="nav-link text-white">Cadastrar Funcionário</a>
+        </li>
+        <li class="nav-item" *ngIf="exibirOpcaoFuncionarios">
+          <a [routerLink]="'/holerites/upload'" class="nav-link text-white">Upload Holerite</a>
+        </li>
+        <li class="nav-item" *ngIf="exibirOpcaoHolerites">
+          <a [routerLink]="'/holerites/consulta'" class="nav-link text-white">Consultar Holerite</a>
         </li>
       </ul>
     </nav>

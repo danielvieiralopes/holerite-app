@@ -3,6 +3,7 @@ import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from "../../core/services/auth.service";
 import { Router } from "@angular/router";
 import { CommonModule } from "@angular/common";
+import { ETipoUsuario } from "../../core/enums/EtipoUsuario";
 
 @Component({
   selector: 'app-login',
@@ -25,32 +26,6 @@ export class LoginComponent {
   })}
 
 
-//   onSubmit() {
-//   if (this.form.invalid) return;
-//   const { cpf, senha } = this.form.value;
-
-//   this.auth.login(cpf!, senha!).subscribe({
-//     next: (res: any) => {
-//       localStorage.setItem('token', res.token);
-//       this.router.navigate(['/holerites/consulta']);
-//     },
-//     error: (err) => {
-//       const error = err.error;
-//       this.mensagemErro = 'CPF ou senha inválidos.';
-
-//       if (error?.precisaTrocarSenha) {
-
-//         localStorage.setItem('cpf_temp', cpf ?? '');
-//         localStorage.setItem('senha_temp', senha ?? '');
-
-//         this.router.navigate(['/alterar-senha']);
-//       } else {
-//          setTimeout(() => this.mensagemErro = '', 4000);
-//       }
-//     }
-//   });
-// }
-
 onSubmit() {
   if (this.form.invalid) return;
 
@@ -59,17 +34,22 @@ onSubmit() {
   this.auth.login(cpf!, senha!).subscribe({
     next: (res: any) => {
       localStorage.setItem('token', res.token);
+      if (res.tipoUsuario != null) {
+        localStorage.setItem('tipoUsuario', res.tipoUsuario.toString());
+      }
 
       if (res.precisaTrocarSenha) {
         localStorage.setItem('cpf_temp', cpf ?? '');
         localStorage.setItem('senha_temp', senha ?? '');
 
-        this.router.navigate(['/alterar-senha']); // Redireciona para tela de troca de senha
+        this.router.navigate(['/alterar-senha']); 
       } else {
         this.router.navigate(['/holerites/consulta']);
       }
     },
-    error: () => alert('CPF ou senha inválidos.')
+    error: (err) => {
+      alert('CPF ou senha inválidos.');
+    }
   });
 }
 

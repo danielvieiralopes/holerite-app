@@ -2,7 +2,8 @@ import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Funcionario } from "../models/funcionario";
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
+import { ETipoUsuario } from "../enums/EtipoUsuario";
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -11,8 +12,15 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(cpf: string, senha: string): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>(`${this.apiUrl}/login`, { cpf, senha });
+  login(cpf: string, senha: string): Observable<{ token: string, tipoUsuario: ETipoUsuario }> {
+    return this.http.post<{ token: string, tipoUsuario: ETipoUsuario }>(`${this.apiUrl}/login`, { cpf, senha }).pipe(
+      tap(res => {
+        localStorage.setItem('token', res.token);
+        if (res.tipoUsuario != null) {
+          localStorage.setItem('tipoUsuario', res.tipoUsuario?.toString() ?? '');
+        }
+      })
+    );
   }
 
    getUsuarioLogado() {
@@ -23,6 +31,14 @@ export class AuthService {
       }
     }
     return this.usuario;
+  }
+
+  getTipoUsuario(): ETipoUsuario | null {
+    const tipoUsuarioStr = localStorage.getItem('tipoUsuario');
+    if (tipoUsuarioStr) {
+      return parseInt(tipoUsuarioStr, 10) as ETipoUsuario; 
+    }
+    return null;
   }
 
   logout() {
