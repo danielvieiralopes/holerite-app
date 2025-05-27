@@ -58,22 +58,38 @@ export class ListaFuncionariosComponent implements OnInit {
   salvarEdicao() {
     if (this.funcionarioEditadoTemp.id) {
       this.funcionarioService.atualizar(this.funcionarioEditadoTemp).subscribe({
-        next: () => {
+        next: (response) => {
+          console.log('Update successful:', response); // Log the entire response
           this.funcionarioEditandoId = null;
           this.carregarFuncionarios();
         },
-        error: () => alert('Erro ao atualizar funcionário.')
+        error: (error) => {
+          console.error('Erro ao atualizar funcionário:', error);
+          alert('Erro ao atualizar funcionário.');
+        }
       });
     }
   }
 
   excluirFuncionario(funcionario: Funcionario) {
-    const confirmacao = confirm(`Deseja excluir o funcionário ${funcionario.nomeFuncionario}?`);
-    if (confirmacao && funcionario.id) {
-      this.funcionarioService.excluir(funcionario.id).subscribe({
-        next: () => this.carregarFuncionarios(),
-        error: () => alert('Erro ao excluir funcionário.')
-      });
-    }
+  const confirmacao = confirm(`Deseja desativar o funcionário ${funcionario.nomeFuncionario}?`);
+  if (confirmacao && funcionario.id) {
+    this.funcionarioService.excluir(funcionario.id).subscribe({
+      next: (response) => {
+        if (response.status === 200 || response.status === 204) {
+          // remover localmente da lista
+          this.funcionariosFiltrados = this.funcionarios.filter(f => f.id !== funcionario.id);
+        } else {
+          alert('Erro ao desativar funcionário.');
+        }
+      },
+      error: (error) => {
+        console.error('Erro ao desativar funcionário:', error);
+        alert('Erro ao desativar funcionário.');
+      }
+    });
   }
+}
+
+
 }

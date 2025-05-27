@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Funcionario } from '../models/funcionario';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,11 @@ export class FuncionarioService {
     return this.http.get<Funcionario[]>(this.apiUrl);
   }
 
-  atualizar(funcionario: Funcionario): Observable<Funcionario> {
-    return this.http.put<Funcionario>(`${this.apiUrl}/${funcionario.id}`, funcionario);
+  atualizar(funcionario: Funcionario): Observable<HttpResponse<Funcionario>> {
+    return this.http.put<Funcionario>(`${this.apiUrl}/${funcionario.id}`, funcionario, { observe: 'response' });
   }
 
-  excluir(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+  excluir(id: number): Observable<HttpResponse<any>> {
+    return this.http.patch<any>(`${this.apiUrl}/${id}`, null, { observe: 'response' });
   }
 }
