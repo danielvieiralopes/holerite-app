@@ -1,59 +1,79 @@
-# HoleriteApp
+# Holerite App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.9.
+Este projeto faz parte do Programa de Extensão (PEX) da Faculdade Descomplica, com o objetivo de desenvolver uma aplicação web para gerenciamento de holerites de funcionários.
 
-## Development server
+## 🧾 Objetivo
 
-To start a local development server, run:
+Desenvolver um sistema que permita:
 
-```bash
-ng serve
-```
+- Carregar e processar arquivos PDF contendo holerites;
+- Identificar e extrair dados dos funcionários a partir do conteúdo dos PDFs;
+- Relacionar os holerites aos respectivos funcionários;
+- Exibir as informações extraídas em uma interface amigável.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+> A proposta é oferecer uma solução automatizada para organizar e gerenciar documentos de folha de pagamento para a empresa parceira do projeto de extensão.
 
-## Code scaffolding
+## ⚙️ Tecnologias utilizadas
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Frontend:** Angular 19 (em desenvolvimento)
+- **Backend:** .NET 6 / C# (em desenvolvimento) 
+  - Iniciado como aplicação console para extração e separação de holerites
+  - Em transição para API REST
+- **Outras ferramentas:**
+  - Git e GitHub
+  - Bibliotecas .NET para processamento de PDF
 
-```bash
-ng generate component component-name
-```
+## 📦 Estrutura atual do projeto
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Frontend
 
-```bash
-ng generate --help
-```
+O frontend está sendo desenvolvido como um protótipo funcional e utiliza **dados mockados** para simular o comportamento da aplicação.
 
-## Building
+- [x] Interface de carregamento de holerites
+- [x] Visualização básica dos dados extraídos
+- [ ] Integração com o backend (em andamento)
 
-To build the project run:
+### Backend
 
-```bash
-ng build
-```
+O backend já é capaz de:
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- [x] Extrair nomes dos funcionários a partir de arquivos PDF
+- [x] Separar holerites individualmente com base no nome
+- [x] Relacionar holerites aos respectivos funcionários
+- [x] Armazenar dados em banco de dados
 
-## Running unit tests
+> O backend será expandido no próximo ciclo do PEX para incluir funcionalidades adicionais.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## 🧪 Como testar o protótipo
 
-```bash
-ng test
-```
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/danielvieiralopes/holerite-app.git
+Acesse a pasta do projeto e abra o index.html (ou a aplicação Angular, se já configurada).
 
-## Running end-to-end tests
+Os dados exibidos atualmente são mockados apenas para fins de demonstração visual.
 
-For end-to-end (e2e) testing, run:
+🚧 Próximos passos
+Finalizar a API REST com .NET para servir os dados extraídos
 
-```bash
-ng e2e
-```
+Conectar o frontend à API via HTTP
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Implementar:
 
-## Additional Resources
+Autenticação de usuário
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Gerenciamento de perfis
+
+Painel de administração
+
+Geração de relatórios
+
+📌 Observações
+Este projeto foi idealizado e está sendo desenvolvido no contexto acadêmico e prático do Programa de Extensão (PEX) da Faculdade Descomplica.
+
+A proposta é aplicar conceitos reais de desenvolvimento web, boas práticas de engenharia de software e colaboração com empresas reais.
+
+👨‍💻 Autor
+Desenvolvido por Daniel Vieira Lopes
+Faculdade Descomplica – Ciência da Computação
+Projeto PEX – 2025
