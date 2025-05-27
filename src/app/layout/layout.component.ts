@@ -45,7 +45,7 @@ export class LayoutComponent implements OnInit {
 
   @HostListener('window:resize')
   checkScreenSize() {
-    this.isSmallScreen = window.innerWidth < 992; // Bootstrap 'lg' breakpoint
+    this.isSmallScreen = window.innerWidth < 992; 
     if (this.isSmallScreen) {
       this.sidebarVisible = false;
     } else {

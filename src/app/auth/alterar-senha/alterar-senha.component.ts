@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class AlterarSenhaComponent {
   form;
+  senhaVisivel = false;
 
   constructor(
     private fb: FormBuilder,
@@ -39,5 +40,9 @@ export class AlterarSenhaComponent {
         alert('Erro ao alterar a senha. Por favor, tente novamente.');
       }
     });
+  }
+
+  toggleSenhaVisivel(): void {
+    this.senhaVisivel = !this.senhaVisivel;
   }
 }

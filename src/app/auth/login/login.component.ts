@@ -14,6 +14,7 @@ import { ETipoUsuario } from "../../core/enums/EtipoUsuario";
 export class LoginComponent {
   form;
   mensagemErro = '';
+  senhaVisivel = false;
 
 
   constructor(
@@ -24,6 +25,10 @@ export class LoginComponent {
     cpf: ['', Validators.required],
     senha: ['', Validators.required]
   })}
+
+  toggleSenhaVisivel(): void {
+    this.senhaVisivel = !this.senhaVisivel;
+  }
 
 
 onSubmit() {

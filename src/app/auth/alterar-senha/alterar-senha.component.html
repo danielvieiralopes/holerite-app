@@ -4,15 +4,20 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="novaSenha" class="form-label">Nova Senha</label>
-        <input
-          type="password"
-          id="novaSenha"
-          class="form-control"
-          formControlName="novaSenha"
-          placeholder="Digite a nova senha"
-        />
+        <div class="input-group">
+          <input
+            [type]="senhaVisivel ? 'text' : 'password'"
+            id="novaSenha"
+            class="form-control"
+            formControlName="novaSenha"
+            placeholder="Digite a nova senha"
+          />
+          <button class="btn btn-outline-secondary" type="button" (click)="toggleSenhaVisivel()">
+            <i class="bi" [class.bi-eye]="!senhaVisivel" [class.bi-eye-slash]="senhaVisivel"></i>
+          </button>
+        </div>
 
-        <!-- adicione validacao para pelo menos uma letra minuscula uma maiuscula e um caractere especial e no minimo 6 caracteres -->
+        
         <div *ngIf="form.get('novaSenha')?.invalid && form.get('novaSenha')?.touched" class="text-danger mt-1">
           A senha deve ter no mínimo 6 caracteres.
         </div>

@@ -15,15 +15,20 @@
           CPF é obrigatório.
         </div>
       </div>
-
+      
       <div class="mb-3">
         <label class="form-label">Senha</label>
-        <input
-          type="password"
-          class="form-control"
-          formControlName="senha"
-          placeholder="Digite sua senha"
-        />
+        <div class="input-group">
+          <input
+            [type]="senhaVisivel ? 'text' : 'password'"
+            class="form-control"
+            formControlName="senha"
+            placeholder="Digite sua senha"
+          />
+          <button class="btn btn-outline-secondary" type="button" (click)="toggleSenhaVisivel()">
+            <i class="bi" [class.bi-eye]="!senhaVisivel" [class.bi-eye-slash]="senhaVisivel"></i>
+          </button>
+        </div>
         <div class="text-danger mt-1" *ngIf="form.get('senha')?.touched && form.get('senha')?.invalid">
           Senha é obrigatória.
         </div>
