@@ -27,4 +27,9 @@ export class AuthService {
     localStorage.clear();
     this.usuario = null;
   }
+
+  alterarSenha(senhaAtual: string, novaSenha: string) {
+   return this.http.post<{ token: string }>(`${this.apiUrl}/change-password`, { senhaAtual, novaSenha });
+}
+
 }

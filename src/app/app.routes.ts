@@ -5,6 +5,7 @@ import { ListaFuncionariosComponent } from './funcionarios/lista-funcionarios/li
 import { CadastroFuncionarioComponent } from './funcionarios/cadastro-funcionario/cadastro-funcionario.component';
 import { CadastroHoleriteComponent } from './holerites/cadastro-holerite/cadastro-holerite.component';
 import { ConsultaHoleriteComponent } from './holerites/consulta-holerite/consulta-holerite.component';
+import { AlterarSenhaComponent } from './auth/alterar-senha/alterar-senha.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -17,6 +18,7 @@ export const routes: Routes = [
       { path: 'funcionarios/cadastrar', component: CadastroFuncionarioComponent },
       { path: 'holerites/upload', component: CadastroHoleriteComponent },
       { path: 'holerites/consulta', component: ConsultaHoleriteComponent },
+      {path: 'alterar-senha', component: AlterarSenhaComponent},
       { path: '', redirectTo: '', pathMatch: 'full' }
     ]
   },

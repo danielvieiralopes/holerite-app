@@ -1,0 +1,7 @@
+<h2>Alterar Senha</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <label>Nova Senha:
+    <input type="password" formControlName="novaSenha" />
+  </label>
+  <button type="submit">Salvar</button>
+</form>
