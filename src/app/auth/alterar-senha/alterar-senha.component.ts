@@ -33,7 +33,7 @@ export class AlterarSenhaComponent {
         localStorage.removeItem('cpf_temp');
         localStorage.removeItem('senha_temp');
         alert('Senha alterada com sucesso!');
-        this.router.navigate(['/login']);
+        this.router.navigate(['']);
       },
       error: (error) => {
         console.error('Erro ao alterar a senha:', error);

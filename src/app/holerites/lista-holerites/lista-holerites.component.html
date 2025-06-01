@@ -1,0 +1,108 @@
+<div class="container mt-5">
+  <div class="card shadow-sm p-4">
+    <h3 class="mb-4">📃 Lista de Holerites</h3>
+
+    <div class="mb-3 row">
+      <div class="col-md-12">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="🔍 Pesquisar por nome"
+          [(ngModel)]="termoPesquisa"
+          (input)="filtrarHolerites()"
+        />
+      </div>
+    </div>
+
+    <div class="mb-3 row">
+      <div class="col-md-4">
+        <input
+         placeholder="Mês de Referência (1-12)"
+          class="form-control"
+          type="number"
+          [(ngModel)]="mesReferencia"
+          name="mesReferencia"
+          min="1"
+          max="12"
+        />
+      </div>
+      <div class="col-md-4">
+        <input
+          placeholder="Ano de Referência (2000-2100)"
+          class="form-control"
+          type="number"
+          [(ngModel)]="anoReferencia"
+          name="anoReferencia"
+          min="2000"
+          max="2100"
+        />
+      </div>
+      <div class="col-md-4">
+        <select
+          class="form-select"
+          [(ngModel)]="tipoHolerite"
+          name="tipoHolerite"
+        >
+          <option value="" disabled selected>Tipo de Holerite</option>
+          <option *ngFor="let tipo of tipos" [ngValue]="tipo.id">
+            {{ tipo.nome }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <table class="table table-bordered table-hover align-middle text-center">
+      <thead class="table-light">
+        <tr>
+          <th>Nome</th>
+          <th>Tipo Holerite</th>
+          <th>Mês de Referência</th>
+          <th>Ano de Referência</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let h of holeritesFiltrados">
+            <td>{{ h.nomeFuncionario }}</td>
+            <td>{{ getTipoHoleriteNome(h.tipoHolerite) }}</td>
+            <td>{{ h.mesReferencia }}</td>
+            <td>{{ h.anoReferencia }}</td>
+            <td>
+              <button
+                class="btn btn-sm btn-warning me-2"
+                (click)="abrirSeletorArquivo(h)"
+              >
+                📤 Alterar
+              </button>
+              <input
+                type="file"
+                style="display: none"
+                (change)="onFileSelected($event, h)"
+                #fileInput
+                accept=".pdf"
+              />
+              <button
+                class="btn btn-sm btn-danger me-2"
+                (click)="excluirHolerite(h.id)"
+              >
+                🗑️ Excluir
+              </button>
+              <button
+                class="btn btn-sm btn-primary"
+                (click)="baixarHolerite(h)"
+              >
+                📥 Baixar
+              </button>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div
+      *ngIf="holeritesFiltrados.length === 0"
+      class="alert alert-warning mt-3"
+    >
+      Nenhum Holerite encontrado.
+    </div>
+  </div>
+</div>

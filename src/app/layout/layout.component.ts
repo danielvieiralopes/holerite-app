@@ -15,37 +15,49 @@ export class LayoutComponent implements OnInit {
   usuario: any;
   sidebarVisible = true;
   isSmallScreen = false;
+  tipoUsuario: ETipoUsuario = ETipoUsuario.Usuario;
 
   exibirOpcaoFuncionarios: boolean = false;
   exibirOpcaoHolerites: boolean = false;
+  menuItems: { label: string; route: string }[] = [];
 
-  menuItems = [
-    { label: '🔍  Holerite', route: '/holerites/consulta' },
-    { label: '📤 Cadastrar Holerites', route: '/holerites/upload' },
-    { label: ' 📋 Funcionários', route: '/funcionarios' },
-    { label: '➕ Cadastrar Funcionário', route: '/funcionarios/cadastrar' }
-  ];
 
   constructor(private authService: AuthService, private router: Router) {}
 
+
+
   ngOnInit(): void {
     this.usuario = this.authService.getUsuarioLogado();
-    const tipoUsuario = this.authService.getTipoUsuario();
+     this.tipoUsuario = this.authService.getTipoUsuario() ?? ETipoUsuario.Usuario;
 
-    if (tipoUsuario === ETipoUsuario.Admin) {
+    if (this.tipoUsuario === ETipoUsuario.Admin) {
       this.exibirOpcaoFuncionarios = true;
       this.exibirOpcaoHolerites = true;
-    } else if (tipoUsuario === ETipoUsuario.Usuario) {
+    } else if (this.tipoUsuario === ETipoUsuario.Usuario) {
       this.exibirOpcaoHolerites = true;
       this.exibirOpcaoFuncionarios = false;
     }
 
+  
+
+  if (this.tipoUsuario === ETipoUsuario.Admin) {
+    this.menuItems = [
+      { label: '🔍 Holerites', route: '/holerites/lista' },
+      { label: '📤 Cadastrar Holerites', route: '/holerites/upload' },
+      { label: '📋 Funcionários', route: '/funcionarios' },
+      { label: '➕ Cadastrar Funcionário', route: '/funcionarios/cadastrar' }
+    ];
+  }
+
+
+
     this.checkScreenSize();
+
   }
 
   @HostListener('window:resize')
   checkScreenSize() {
-    this.isSmallScreen = window.innerWidth < 992; 
+    this.isSmallScreen = window.innerWidth < 992;
     if (this.isSmallScreen) {
       this.sidebarVisible = false;
     } else {
@@ -59,6 +71,6 @@ export class LayoutComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['']);
   }
 }

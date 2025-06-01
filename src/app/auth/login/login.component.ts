@@ -47,9 +47,9 @@ onSubmit() {
         localStorage.setItem('cpf_temp', cpf ?? '');
         localStorage.setItem('senha_temp', senha ?? '');
 
-        this.router.navigate(['/alterar-senha']); 
+        this.router.navigate(['/alterar-senha']);
       } else {
-        this.router.navigate(['/holerites/consulta']);
+               this.router.navigate([res.tipoUsuario === ETipoUsuario.Admin ? '/holerites/lista' : '/holerites/consulta']);
       }
     },
     error: (err) => {

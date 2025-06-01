@@ -4,11 +4,13 @@ import { Observable } from "rxjs";
 import { Funcionario } from "../models/funcionario";
 import { tap, map } from 'rxjs/operators';
 import { ETipoUsuario } from "../enums/EtipoUsuario";
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private apiUrl = 'http://localhost:5258/api/auth';
   private usuario: any = null;
+  private jwtHelper = new JwtHelperService();
 
   constructor(private http: HttpClient) {}
 
@@ -24,19 +26,23 @@ export class AuthService {
   }
 
    getUsuarioLogado() {
-    if (!this.usuario) {
-      const usuarioStr = localStorage.getItem('usuario');
-      if (usuarioStr) {
-        this.usuario = JSON.parse(usuarioStr);
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      if (decodedToken && decodedToken['given_name']) {
+        const fullName = decodedToken['given_name'];
+        const firstName = fullName.split(' ')[0];
+        return { name: firstName };
       }
+      return null;
     }
-    return this.usuario;
+    return null;
   }
 
   getTipoUsuario(): ETipoUsuario | null {
     const tipoUsuarioStr = localStorage.getItem('tipoUsuario');
     if (tipoUsuarioStr) {
-      return parseInt(tipoUsuarioStr, 10) as ETipoUsuario; 
+      return parseInt(tipoUsuarioStr, 10) as ETipoUsuario;
     }
     return null;
   }

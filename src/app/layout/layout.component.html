@@ -4,10 +4,10 @@
     <button class="btn btn-outline-secondary d-lg-none me-2" (click)="toggleSidebar()">
       ☰ Menu
     </button>
-    <a class="navbar-brand" [routerLink]="'/holerites/consulta'" routerLinkActive="active">🏠 Home</a>
+    <a class="navbar-brand"> 📃 Holerite Web</a>
 
     <div class="ms-auto d-flex align-items-center">
-      <span class="me-3 text-muted">👤 {{ usuario?.nome }}</span>
+      <span class="me-3 text-white">👤 {{ usuario?.name }}</span>
       <button class="btn btn-outline-danger btn-sm" (click)="logout()">Sair</button>
     </div>
   </nav>
@@ -21,20 +21,15 @@
       style="width: 250px;"
       *ngIf="exibirOpcaoFuncionarios || exibirOpcaoHolerites"
     >
+    <div *ngIf="tipoUsuario === 1">
       <h4 class="mb-4">📁 Menu</h4>
+    </div>
       <ul class="nav flex-column">
-        <li class="nav-item" *ngIf="exibirOpcaoFuncionarios">
-          <a [routerLink]="'/funcionarios'" class="nav-link text-white">Funcionários</a>
-        </li>
-        <li class="nav-item" *ngIf="exibirOpcaoFuncionarios">
-          <a [routerLink]="'/funcionarios/cadastrar'" class="nav-link text-white">Cadastrar Funcionário</a>
-        </li>
-        <li class="nav-item" *ngIf="exibirOpcaoFuncionarios">
-          <a [routerLink]="'/holerites/upload'" class="nav-link text-white">Upload Holerite</a>
-        </li>
-        <li class="nav-item" *ngIf="exibirOpcaoHolerites">
-          <a [routerLink]="'/holerites/consulta'" class="nav-link text-white">Consultar Holerite</a>
-        </li>
+        <ng-container *ngIf="exibirOpcaoFuncionarios">
+          <li class="nav-item" *ngFor="let item of menuItems">
+            <a [routerLink]="item.route" class="nav-link text-white">{{ item.label }}</a>
+          </li>
+        </ng-container>
       </ul>
     </nav>
 

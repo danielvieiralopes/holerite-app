@@ -8,9 +8,10 @@ import { ConsultaHoleriteComponent } from './holerites/consulta-holerite/consult
 import { AlterarSenhaComponent } from './auth/alterar-senha/alterar-senha.component';
 import { authGuard } from './core/guards/auth.guard';
 import { ETipoUsuario } from './core/enums/EtipoUsuario';
+import { ListaHoleritesComponent } from './holerites/lista-holerites/lista-holerites.component';
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: '', component: LoginComponent },
   {path: 'alterar-senha', component: AlterarSenhaComponent},
 
   {
@@ -20,7 +21,8 @@ export const routes: Routes = [
       { path: 'funcionarios', component: ListaFuncionariosComponent, canActivate: [authGuard], data: { expectedRole: ETipoUsuario.Admin } },
       { path: 'funcionarios/cadastrar', component: CadastroFuncionarioComponent, canActivate: [authGuard], data: { expectedRole: ETipoUsuario.Admin } },
       { path: 'holerites/upload', component: CadastroHoleriteComponent, canActivate: [authGuard], data: { expectedRole: ETipoUsuario.Admin } },
-      { path: 'holerites/consulta', component: ConsultaHoleriteComponent, canActivate: [authGuard]},
+      { path: 'holerites/consulta', component: ConsultaHoleriteComponent, canActivate: [authGuard], data: { expectedRole: ETipoUsuario.Usuario }},
+      {path: 'holerites/lista', component: ListaHoleritesComponent, canActivate: [authGuard], data: { expectedRole: ETipoUsuario.Admin }},
       {path: 'alterar-senha', component: AlterarSenhaComponent},
       { path: '', redirectTo: '', pathMatch: 'full' }
     ]

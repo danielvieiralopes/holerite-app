@@ -58,8 +58,7 @@ export class ListaFuncionariosComponent implements OnInit {
   salvarEdicao() {
     if (this.funcionarioEditadoTemp.id) {
       this.funcionarioService.atualizar(this.funcionarioEditadoTemp).subscribe({
-        next: (response) => {
-          console.log('Update successful:', response); // Log the entire response
+        next: (response) => {  
           this.funcionarioEditandoId = null;
           this.carregarFuncionarios();
         },
