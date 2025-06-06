@@ -69,11 +69,20 @@ export class ListaHoleritesComponent {
   }
 
   filtrarHolerites() {
-   const termo = this.termoPesquisa.toLowerCase();
-    this.holeritesFiltrados = this.holerites.filter(h =>
-      h.nomeFuncionario.toLowerCase().includes(termo)
-    );
-  }
+  const termo = this.termoPesquisa.toLowerCase();
+  const mes = this.mesReferencia;
+  const ano = this.anoReferencia;
+  const tipo = this.tipoHolerite;
+
+  this.holeritesFiltrados = this.holerites.filter(h => {
+    const nomeMatch = h.nomeFuncionario.toLowerCase().includes(termo);
+    const mesMatch = mes ? h.mesReferencia === mes : true;
+    const anoMatch = ano ? h.anoReferencia === ano : true;
+    const tipoMatch = tipo ? h.tipoHolerite === tipo : true;
+
+    return nomeMatch && mesMatch && anoMatch && tipoMatch;
+  });
+}
 
   baixarHolerite(holerite: Holerite) {
     this.holeriteService.consultaHolerite({

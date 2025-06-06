@@ -43,6 +43,7 @@ export class CadastroFuncionarioComponent {
   }
 
 cadastrarFuncionario(form: NgForm) {
+  this.funcionario.tipoUsuario = +this.funcionario.tipoUsuario;
   this.authService.cadastrar(this.funcionario).subscribe({
     next: () => {
       this.mensagem = 'Funcionário cadastrado com sucesso!';
@@ -53,27 +54,6 @@ cadastrarFuncionario(form: NgForm) {
     }
   });
 
-    form.resetForm();
-
-     this.showMessage = true;
-    this.progress = 100;
-
-    // Anula qualquer timer anterior
-    if (this.intervalId) clearInterval(this.intervalId);
-
-    const totalDuration = 3000; // 3 segundos
-    const stepTime = 50;        // a cada 50ms atualiza barra
-    const stepCount = totalDuration / stepTime;
-    let currentStep = 0;
-
-    this.intervalId = setInterval(() => {
-      currentStep++;
-      this.progress = 100 - (currentStep / stepCount) * 100;
-
-      if (currentStep >= stepCount) {
-        clearInterval(this.intervalId);
-        this.showMessage = false;
-      }
-    }, stepTime);
+  form.resetForm();
 }
 }

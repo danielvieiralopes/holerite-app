@@ -31,8 +31,10 @@ export class AuthService {
       const decodedToken = this.jwtHelper.decodeToken(token);
       if (decodedToken && decodedToken['given_name']) {
         const fullName = decodedToken['given_name'];
+        const username = decodedToken['unique_name'] || '';
         const firstName = fullName.split(' ')[0];
-        return { name: firstName };
+
+        return { name: firstName, username: username  };
       }
       return null;
     }

@@ -24,6 +24,7 @@
           name="mesReferencia"
           min="1"
           max="12"
+          (input)="filtrarHolerites()"
         />
       </div>
       <div class="col-md-4">
@@ -35,6 +36,7 @@
           name="anoReferencia"
           min="2000"
           max="2100"
+          (input)="filtrarHolerites()"
         />
       </div>
       <div class="col-md-4">
@@ -42,6 +44,7 @@
           class="form-select"
           [(ngModel)]="tipoHolerite"
           name="tipoHolerite"
+          (change)="filtrarHolerites()"
         >
           <option value="" disabled selected>Tipo de Holerite</option>
           <option *ngFor="let tipo of tipos" [ngValue]="tipo.id">

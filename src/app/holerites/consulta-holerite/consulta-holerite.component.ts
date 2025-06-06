@@ -1,3 +1,4 @@
+import { AuthService } from './../../core/services/auth.service';
 import { Component } from '@angular/core';
 import { HoleriteService } from '../../core/services/holerite.service';
 import { saveAs } from 'file-saver';
@@ -33,16 +34,16 @@ tipos = Object.keys(ETipoHolerite)
   }
 
 
-  constructor(private holeriteService: HoleriteService) {}
+  constructor(private holeriteService: HoleriteService, private authService: AuthService) {}
 
   onSubmit() {
-    if (!this.cpf || !this.tipoHolerite || !this.mesReferencia || !this.anoReferencia) {
+    if (!this.tipoHolerite || !this.mesReferencia || !this.anoReferencia) {
       alert('Preencha todos os campos!');
       return;
     }
 
     const consulta = {
-      cpf: this.cpf,
+      cpf: this.authService.getUsuarioLogado()?.username,
       tipoHolerite: this.tipoHolerite,
       mesReferencia: this.mesReferencia,
       anoReferencia: this.anoReferencia
