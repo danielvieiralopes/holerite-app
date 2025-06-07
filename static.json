@@ -1,6 +1,5 @@
 {
-  "public": "dist/holerite-app",
-  "rewrites": [
-    { "source": "**", "destination": "/index.html" }
-  ]
+  "routes": {
+    "/**": "index.html"
+  }
 }

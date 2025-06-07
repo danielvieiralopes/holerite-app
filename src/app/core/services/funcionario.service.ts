@@ -14,14 +14,14 @@ export class FuncionarioService {
   constructor(private http: HttpClient) {}
 
   listar(): Observable<Funcionario[]> {
-    return this.http.get<Funcionario[]>(`${environment.apiUrl}/${this.urlService}`);
+    return this.http.get<Funcionario[]>(`${environment.apiUrl}${this.urlService}`);
   }
 
   atualizar(funcionario: Funcionario): Observable<HttpResponse<Funcionario>> {
-    return this.http.put<Funcionario>(`${environment.apiUrl}/${this.urlService}/${funcionario.id}`, funcionario, { observe: 'response' });
+    return this.http.put<Funcionario>(`${environment.apiUrl}${this.urlService}/${funcionario.id}`, funcionario, { observe: 'response' });
   }
 
   excluir(id: number): Observable<HttpResponse<any>> {
-    return this.http.patch<any>(`${environment.apiUrl}/${this.urlService}/${id}`, null, { observe: 'response' });
+    return this.http.patch<any>(`${environment.apiUrl}${this.urlService}/${id}`, null, { observe: 'response' });
   }
 }

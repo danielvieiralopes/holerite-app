@@ -11,22 +11,25 @@ import { ETipoUsuario } from './core/enums/EtipoUsuario';
 import { ListaHoleritesComponent } from './holerites/lista-holerites/lista-holerites.component';
 
 export const routes: Routes = [
+  // Página inicial redireciona para login
   { path: '', component: LoginComponent },
-  {path: 'alterar-senha', component: AlterarSenhaComponent},
 
+  // Rota para alterar senha fora do layout
+  { path: 'alterar-senha', component: AlterarSenhaComponent },
+
+  // Rotas protegidas dentro do layout
   {
     path: '',
-    component: LayoutComponent, // aqui entra a navbar + sidebar
+    component: LayoutComponent, // Navbar + Sidebar
     children: [
       { path: 'funcionarios', component: ListaFuncionariosComponent, canActivate: [authGuard], data: { expectedRole: ETipoUsuario.Admin } },
       { path: 'funcionarios/cadastrar', component: CadastroFuncionarioComponent, canActivate: [authGuard], data: { expectedRole: ETipoUsuario.Admin } },
       { path: 'holerites/upload', component: CadastroHoleriteComponent, canActivate: [authGuard], data: { expectedRole: ETipoUsuario.Admin } },
-      { path: 'holerites/consulta', component: ConsultaHoleriteComponent, canActivate: [authGuard], data: { expectedRole: ETipoUsuario.Usuario }},
-      {path: 'holerites/lista', component: ListaHoleritesComponent, canActivate: [authGuard], data: { expectedRole: ETipoUsuario.Admin }},
-      {path: 'alterar-senha', component: AlterarSenhaComponent},
-      { path: '', redirectTo: '', pathMatch: 'full' }
+      { path: 'holerites/consulta', component: ConsultaHoleriteComponent, canActivate: [authGuard], data: { expectedRole: ETipoUsuario.Usuario } },
+      { path: 'holerites/lista', component: ListaHoleritesComponent, canActivate: [authGuard], data: { expectedRole: ETipoUsuario.Admin } }
     ]
   },
 
+  // Rota coringa para redirecionar rotas inválidas para login
   { path: '**', redirectTo: '' }
 ];
