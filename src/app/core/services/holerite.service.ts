@@ -4,12 +4,13 @@ import { Observable } from 'rxjs';
 import { Holerite } from '../models/holerite';
 import { HoleriteResponse } from '../models/holeriteResponse';
 import { HoleriteRequest } from '../models/holeriteRequest';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HoleriteService {
-  private apiUrl = 'http://localhost:5258/api/holerites';
+  private urlService = '/holerites';
 
   constructor(private http: HttpClient) {}
 
@@ -20,11 +21,11 @@ export class HoleriteService {
     formData.append('AnoReferencia', anoReferencia.toString());
     formData.append('TipoHolerite', tipoHolerite.toString());
 
-    return this.http.post(`${this.apiUrl}/upload`, formData, { responseType: 'text' });
+    return this.http.post(`${environment.apiUrl}/${this.urlService}/upload`, formData, { responseType: 'text' });
   }
 
   consultaHolerite(consulta: HoleriteRequest): Observable<Blob> {
-    return this.http.post(`${this.apiUrl}/consulta`, consulta, { responseType: 'blob' });
+    return this.http.post(`${environment.apiUrl}/${this.urlService}/consulta`, consulta, { responseType: 'blob' });
   }
 
   atualizarHolerite(id: number, file: File, mesReferencia: number, anoReferencia: number, tipoHolerite: number): Observable<any> {
@@ -34,14 +35,14 @@ export class HoleriteService {
     formData.append('AnoReferencia', anoReferencia.toString());
     formData.append('TipoHolerite', tipoHolerite.toString());
 
-    return this.http.put(`${this.apiUrl}/${id}`, formData, { responseType: 'text' });
+    return this.http.put(`${environment.apiUrl}/${this.urlService}/${id}`, formData, { responseType: 'text' });
   }
 
   excluirHolerite(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`, { responseType: 'text' });
+    return this.http.delete(`${environment.apiUrl}/${this.urlService}/${id}`, { responseType: 'text' });
   }
 
   listarHolerites(): Observable<HoleriteResponse[]> {
-    return this.http.get<HoleriteResponse[]>(this.apiUrl);
+    return this.http.get<HoleriteResponse[]>(`${environment.apiUrl}/${this.urlService}`);
   }
 }
