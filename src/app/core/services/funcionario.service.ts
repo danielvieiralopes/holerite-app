@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class FuncionarioService {
-  private urlService = 'Usuarios';
+  private urlService = '/Usuarios';
 
   constructor(private http: HttpClient) {}
 

@@ -10,7 +10,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class HoleriteService {
-  private urlService = 'holerites';
+  private urlService = '/holerites';
 
   constructor(private http: HttpClient) {}
 

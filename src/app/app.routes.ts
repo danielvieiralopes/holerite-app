@@ -26,7 +26,8 @@ export const routes: Routes = [
       { path: 'funcionarios/cadastrar', component: CadastroFuncionarioComponent, canActivate: [authGuard], data: { expectedRole: ETipoUsuario.Admin } },
       { path: 'holerites/upload', component: CadastroHoleriteComponent, canActivate: [authGuard], data: { expectedRole: ETipoUsuario.Admin } },
       { path: 'holerites/consulta', component: ConsultaHoleriteComponent, canActivate: [authGuard], data: { expectedRole: ETipoUsuario.Usuario } },
-      { path: 'holerites/lista', component: ListaHoleritesComponent, canActivate: [authGuard], data: { expectedRole: ETipoUsuario.Admin } }
+      { path: 'holerites/lista', component: ListaHoleritesComponent, canActivate: [authGuard], data: { expectedRole: ETipoUsuario.Admin } },
+       { path: 'alterar-senha', component: AlterarSenhaComponent }
     ]
   },
 
