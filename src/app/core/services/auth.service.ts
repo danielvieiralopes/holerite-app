@@ -10,7 +10,7 @@ import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private urlService = '/auth';
+  private urlService = 'auth';
   private usuario: any = null;
   private jwtHelper = new JwtHelperService();
 
